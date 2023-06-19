@@ -22,3 +22,11 @@ dev_dependencies:
 flutter:
   generate: true 
   uses-material-design: true
+  fonts:
+    - family: Avenir
+      fonts:
+        - asset: lib/presentation/fonts/Avenir.ttc
+    - family: Segment7Standard
+      fonts:
+        - asset: lib/presentation/fonts/Segment7Standard.otf
+
