@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:consumption_fuel_calculator/presentation/fonts/export.dart';
-import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:consumption_fuel_calculator/presentation/widgets/export.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
@@ -11,48 +11,57 @@ class FuelScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final translates = AppLocalizations.of(context)!;
-    final theme = FlexColorScheme();
-    // final Color? color = theme.colorScheme?;
+    final color = Theme.of(context).colorScheme;
     var height = MediaQuery.of(context).size.height;
     return Scaffold(
-        backgroundColor: theme.colorScheme?.surfaceVariant,
-        appBar: AppBar(
-          toolbarHeight: height * 0.04,
-          title: Text(translates.app_name),
-        ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Spacer(),
-                  Text(
-                    translates.volume,
-                    style: Avenir(
-                        color: theme.onBackground, fontSize: height * 0.01),
-                  ),
-                  Spacer(),
-                  Expanded(
-                    child: Container(
-                      width: 500,
-                      color: theme.primaryContainer,
-                      child: TextField(
-                        keyboardType: TextInputType.number,
-                        style:
-                            Segment7(color: theme.onBackground, fontSize: 50),
-                        decoration: InputDecoration(
-                          fillColor: theme.primaryContainer,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Spacer()
-                ],
-              )
-            ],
+      extendBody: true,
+      backgroundColor: color.onPrimary,
+      appBar: AppBar(
+        backgroundColor: color.primary,
+        toolbarHeight: height * 0.07,
+        title: Text(
+          translates.app_name,
+          style: Avenir(
+            color: color.onPrimary,
+            fontSize: 20,
           ),
-        ));
+        ),
+      ),
+      body: Padding(
+        padding: EdgeInsets.only(
+            top: height * 0.02, left: height * 0.02, right: height * 0.02),
+        child: Container(
+          color: color.outline,
+          height: double.infinity,
+          child: Padding(
+            padding: EdgeInsets.fromLTRB(
+              height * 0.03,
+              height * 0.03,
+              height * 0.03,
+              height * 0.6,
+            ),
+            child: Container(
+              color: color.shadow,
+              child: Padding(
+                padding: EdgeInsets.all(
+                  height * 0.03,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    FuelRow(text: translates.volume),
+                    Spacer(),
+                    FuelRow(text: translates.price),
+                    Spacer(),
+                    FuelRow(text: translates.consumption)
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+      bottomNavigationBar: FuelAppBar(),
+    );
   }
 }

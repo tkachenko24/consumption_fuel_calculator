@@ -1,6 +1,13 @@
 {
     "hi_word": "Привіт Світ",
     "app_name": "Розрахунок Витрати Палива",
-    "volume": "Volume",
+    "volume": "Обʼєм",
+    "price": "Ціна",
+    "distance": "Пробіг",
+    "consumption": "Витрата палива", 
+    "theme_tooltip": "Змінити тему",
+    "units_tooltip": "Змінити одиниці виміру",
+    "language_tooltip": "Змінити мову",
+    "list_tooltip": "Історія витрат палива",  
     "bye_word": "Прощавай Світ"
 }

@@ -8,7 +8,10 @@ class Avenir extends TextStyle {
   @override
   final double fontSize;
 
-  const Avenir({required this.color, required this.fontSize});
+  const Avenir({
+    required this.color,
+    required this.fontSize,
+  });
   @override
   String? get fontFamily => "Avenir";
 }
