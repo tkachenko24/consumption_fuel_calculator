@@ -44,16 +44,19 @@ class FuelScreen extends StatelessWidget {
               color: color.shadow,
               child: Padding(
                 padding: EdgeInsets.all(
-                  height * 0.03,
+                  height * 0.01,
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     FuelRow(text: translates.volume),
-                    Spacer(),
                     FuelRow(text: translates.price),
-                    Spacer(),
-                    FuelRow(text: translates.consumption)
+                    FuelRow(text: translates.distance),
+                    FuelRow(
+                      text: translates.consumption,
+                      lock: true,
+                      cursor: false,
+                    ),
                   ],
                 ),
               ),

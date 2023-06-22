@@ -12,23 +12,19 @@ class AppBarButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).colorScheme;
-
-    return Container(
-      decoration: BoxDecoration(
-        color: color.inversePrimary,
-        borderRadius: BorderRadius.vertical(top: Radius.elliptical(15, 15)),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.2), // Колір тіні
-            blurRadius: 4, // Радіус розмиття тіні
-            offset: Offset(0, 2), // Зсув тіні
-          ),
-        ],
-      ),
-      child: IconButton(
-        tooltip: tooltipText,
-        icon: icon,
-        onPressed: onTap,
+    var height = MediaQuery.of(context).size.height;
+    return Padding(
+      padding: EdgeInsets.all(height * 0.02),
+      child: Container(
+        decoration: BoxDecoration(
+          color: color.inversePrimary,
+        ),
+        child: IconButton(
+          color: color.inverseSurface,
+          tooltip: tooltipText,
+          icon: icon,
+          onPressed: onTap,
+        ),
       ),
     );
   }

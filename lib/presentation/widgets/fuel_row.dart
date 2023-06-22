@@ -4,9 +4,13 @@ import 'package:flutter/material.dart';
 class FuelRow extends StatelessWidget {
   const FuelRow({
     super.key,
+    this.lock,
+    this.cursor,
     required this.text,
   });
   final String text;
+  final bool? lock;
+  final bool? cursor;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +36,8 @@ class FuelRow extends StatelessWidget {
           width: width * 0.4,
           height: height * 0.04,
           child: TextField(
-            showCursor: true,
+            readOnly: lock ?? false,
+            showCursor: cursor,
             cursorColor: color.shadow,
             textAlign: TextAlign.end,
             keyboardType: TextInputType.number,
@@ -41,9 +46,14 @@ class FuelRow extends StatelessWidget {
               fontSize: height * 0.03,
             ),
             decoration: InputDecoration(
+              hintText: '0.00',
+              hintStyle: Segment7(
+                color: color.shadow,
+                fontSize: height * 0.03,
+              ),
+              contentPadding: EdgeInsets.all(height * 0.007),
               border: InputBorder.none,
               fillColor: color.primary,
-              isDense: false,
               counterText: '',
             ),
             maxLength: 8,
