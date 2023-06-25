@@ -14,12 +14,13 @@ class AppBarButton extends StatelessWidget {
     final color = Theme.of(context).colorScheme;
     var height = MediaQuery.of(context).size.height;
     return Padding(
-      padding: EdgeInsets.all(height * 0.02),
+      padding: EdgeInsets.all(height * 0.001),
       child: Container(
         decoration: BoxDecoration(
           color: color.inversePrimary,
         ),
         child: IconButton(
+          splashRadius: height * 0.1,
           color: color.inverseSurface,
           tooltip: tooltipText,
           icon: icon,

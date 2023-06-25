@@ -1,10 +1,8 @@
-import 'package:consumption_fuel_calculator/data/export.dart';
 import 'package:consumption_fuel_calculator/presentation/screens/screen.dart';
 import 'package:consumption_fuel_calculator/presentation/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:consumption_fuel_calculator/domain/export.dart';
 
 void main() {
   runApp(
@@ -17,9 +15,7 @@ class FuelApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var themeMode = ref
-        .watch(themeStateProvider.notifier)
-        .state; // Отримання поточного значення стану теми
+    var themeMode = ref.watch(themeStateProvider);
     return MaterialApp(
       title: 'Consumption Fuel Calculator',
       localizationsDelegates: AppLocalizations.localizationsDelegates,
@@ -32,16 +28,25 @@ class FuelApp extends ConsumerWidget {
   }
 }
 
-final themeStateProvider = StateProvider<ThemeMode>((ref) {
-  return ThemeMode.system; // Початкове значення стану теми
-});
+class ThemeStateNotifier extends StateNotifier<ThemeMode> {
+  ThemeStateNotifier() : super(ThemeMode.system);
 
-ThemeMode getNextThemeMode(ThemeMode currentMode) {
-  if (currentMode == ThemeMode.system) {
-    return ThemeMode.light;
-  } else if (currentMode == ThemeMode.light) {
-    return ThemeMode.dark;
-  } else {
-    return ThemeMode.system;
+  void switchTheme() {
+    state = getNextThemeMode(state);
+  }
+
+  ThemeMode getNextThemeMode(ThemeMode currentMode) {
+    if (currentMode == ThemeMode.system) {
+      return ThemeMode.light;
+    } else if (currentMode == ThemeMode.light) {
+      return ThemeMode.dark;
+    } else {
+      return ThemeMode.system;
+    }
   }
 }
+
+final themeStateProvider =
+    StateNotifierProvider<ThemeStateNotifier, ThemeMode>((ref) {
+  return ThemeStateNotifier();
+});

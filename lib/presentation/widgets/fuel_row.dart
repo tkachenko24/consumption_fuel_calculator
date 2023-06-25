@@ -32,7 +32,8 @@ class FuelRow extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(
+        Container(
+          color: color.primary,
           width: width * 0.4,
           height: height * 0.04,
           child: TextField(
@@ -51,9 +52,8 @@ class FuelRow extends StatelessWidget {
                 color: color.shadow,
                 fontSize: height * 0.03,
               ),
-              contentPadding: EdgeInsets.all(height * 0.007),
+              // contentPadding: EdgeInsets.all(height * 0.01),
               border: InputBorder.none,
-              fillColor: color.primary,
               counterText: '',
             ),
             maxLength: 8,
