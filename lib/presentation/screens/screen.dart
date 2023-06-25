@@ -28,23 +28,21 @@ class FuelScreen extends StatelessWidget {
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.only(
-            top: height * 0.02, left: height * 0.02, right: height * 0.02),
+        padding: EdgeInsets.only(top: 15, left: 15, right: 15),
         child: Container(
           color: color.outline,
-          height: double.infinity,
           child: Padding(
             padding: EdgeInsets.fromLTRB(
-              height * 0.03,
-              height * 0.03,
-              height * 0.03,
-              height * 0.6,
+              15,
+              15,
+              15,
+              400,
             ),
             child: Container(
               color: color.shadow,
               child: Padding(
                 padding: EdgeInsets.all(
-                  height * 0.01,
+                  10,
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,

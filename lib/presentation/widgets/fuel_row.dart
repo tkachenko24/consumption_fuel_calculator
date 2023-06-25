@@ -22,7 +22,8 @@ class FuelRow extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         SizedBox(
-          width: width * 0.2,
+          height: 40,
+          width: 130,
           child: Text(
             text,
             overflow: TextOverflow.fade,
@@ -34,8 +35,8 @@ class FuelRow extends StatelessWidget {
         ),
         Container(
           color: color.primary,
-          width: width * 0.4,
-          height: height * 0.04,
+          width: 120,
+          height: 50,
           child: TextField(
             readOnly: lock ?? false,
             showCursor: cursor,
@@ -56,7 +57,7 @@ class FuelRow extends StatelessWidget {
               border: InputBorder.none,
               counterText: '',
             ),
-            maxLength: 8,
+            maxLength: 6,
           ),
         ),
       ],
