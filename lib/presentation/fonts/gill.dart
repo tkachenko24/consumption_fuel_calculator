@@ -2,16 +2,16 @@
 
 import 'package:flutter/material.dart';
 
-class Avenir extends TextStyle {
+class Gill extends TextStyle {
   @override
   final Color? color;
   @override
   final double fontSize;
 
-  const Avenir({
+  const Gill({
     required this.color,
     required this.fontSize,
   });
   @override
-  String? get fontFamily => "Avenir";
+  String? get fontFamily => "GillSans";
 }

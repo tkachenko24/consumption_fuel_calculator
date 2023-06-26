@@ -1,6 +1,6 @@
 {
     "hi_word": "Hello World",
-    "app_name": "Consumption Fuel Calculator",
+    "app_name": "Vehicle Consumption Calculator",
     "volume": "Volume",
     "price": "Price",
     "distance": "Distance",
@@ -10,6 +10,6 @@
     "theme_dark_icon": "Dark",
     "units_tooltip": "Switch units",
     "language_tooltip": "Switch language",
-    "list_tooltip": "Fuel consumption history",                                     
+    "list_tooltip": "Consumption history",                                     
     "bye_word": "Goodbye World"
 }

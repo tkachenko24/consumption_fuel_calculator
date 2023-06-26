@@ -1,4 +1,4 @@
-package com.example.consumption_fuel_calculator
+package vehicle_consumption_calculator
 
 import io.flutter.embedding.android.FlutterActivity
 

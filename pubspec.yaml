@@ -1,5 +1,5 @@
-name: consumption_fuel_calculator
-description: A lightweight application for convenient monitoring of fuel expenses for your car.
+name: vehicle_consumption_calculator
+description: A lightweight application for convenient monitoring of energy expenses for your car.
 publish_to: 'none'
 version: 0.1.0
 
@@ -24,9 +24,9 @@ flutter:
   generate: true 
   uses-material-design: true
   fonts:
-    - family: Avenir
+    - family: GillSans
       fonts:
-        - asset: lib/presentation/fonts/Avenir.ttc
+        - asset: lib/presentation/fonts/GillSans.ttc
     - family: Segment7Standard
       fonts:
         - asset: lib/presentation/fonts/Segment7Standard.otf

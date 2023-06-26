@@ -1,2 +1,2 @@
-# consumption_fuel_calculator
-A lightweight application for convenient monitoring of fuel expenses for your car.
+# vehicle_consumption_calculator
+A lightweight application for convenient monitoring of energy expenses for your car.

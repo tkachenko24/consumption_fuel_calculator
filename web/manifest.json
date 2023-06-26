@@ -1,6 +1,6 @@
 {
-    "name": "consumption_fuel_calculator",
-    "short_name": "consumption_fuel_calculator",
+    "name": "vehicle_consumption_calculator",
+    "short_name": "vehicle_consumption_calculator",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
