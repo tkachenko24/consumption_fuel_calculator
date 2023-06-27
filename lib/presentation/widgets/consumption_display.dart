@@ -1,3 +1,4 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vehicle_consumption_calculator/data/export.dart';
 import 'package:vehicle_consumption_calculator/presentation/export.dart';
 
@@ -27,15 +28,18 @@ class ConsumptionDisplay extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              translates.consumption,
-              textAlign: TextAlign.center,
-              overflow: TextOverflow.fade,
-              style: Gill(
-                color: Colors.white,
-                fontSize: height * 0.025,
-              ),
-            ),
+            Consumer(builder: (context, ref, child) {
+              final unit = ref.watch(unitStateProvider);
+              return Text(
+                "${translates.consumption}, ${unit ? translates.metric_consumption : translates.imperial_consumption}",
+                textAlign: TextAlign.center,
+                overflow: TextOverflow.fade,
+                style: Gill(
+                  color: Colors.white,
+                  fontSize: height * 0.025,
+                ),
+              );
+            }),
             Row(
               children: [
                 Expanded(
@@ -88,7 +92,7 @@ class ConsumptionDisplay extends StatelessWidget {
                   splashRadius: height * 0.1,
                   color: color.onSecondaryContainer,
                   tooltip: "tooltipText",
-                  icon: Icon(Icons.save_sharp),
+                  icon: const Icon(Icons.save_sharp),
                   onPressed: () {},
                 ),
               ],

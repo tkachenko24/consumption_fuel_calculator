@@ -7,7 +7,9 @@ class PumpRow extends StatelessWidget {
     this.consumption,
     this.cursor,
     required this.text,
+    required this.unit,
   });
+  final String unit;
   final String text;
   final bool? consumption;
   final bool? cursor;
@@ -24,7 +26,7 @@ class PumpRow extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            text,
+            "$text, $unit",
             textAlign: TextAlign.center,
             overflow: TextOverflow.fade,
             style: Gill(

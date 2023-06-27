@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vehicle_consumption_calculator/presentation/export.dart';
 
-class ConsumptionRepository extends StateNotifier<ThemeMode> {
-  ConsumptionRepository() : super(ThemeMode.system);
+class ThemeRepository extends StateNotifier<ThemeMode> {
+  ThemeRepository() : super(ThemeMode.system);
 
   void switchTheme() {
     state = getNextThemeMode(state);
@@ -20,6 +20,6 @@ class ConsumptionRepository extends StateNotifier<ThemeMode> {
 }
 
 final themeStateProvider =
-    StateNotifierProvider<ConsumptionRepository, ThemeMode>((ref) {
-  return ConsumptionRepository();
+    StateNotifierProvider<ThemeRepository, ThemeMode>((ref) {
+  return ThemeRepository();
 });
