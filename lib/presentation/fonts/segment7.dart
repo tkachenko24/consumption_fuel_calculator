@@ -1,3 +1,5 @@
+// ignore_for_file: overridden_fields
+
 import 'package:flutter/material.dart';
 
 class Segment7 extends TextStyle {

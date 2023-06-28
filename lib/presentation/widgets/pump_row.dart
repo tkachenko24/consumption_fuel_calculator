@@ -1,19 +1,22 @@
-import 'package:vehicle_consumption_calculator/presentation/fonts/export.dart';
-import 'package:flutter/material.dart';
+import 'package:vehicle_consumption_calculator/data/export.dart';
+import 'package:vehicle_consumption_calculator/presentation/export.dart';
 
 class PumpRow extends StatelessWidget {
-  const PumpRow({
-    super.key,
-    this.consumption,
-    this.cursor,
-    required this.text,
-    required this.unit,
-  });
+  const PumpRow(
+      {super.key,
+      required this.text,
+      required this.unit,
+      required this.translates,
+      required this.status,
+      required this.controller,
+      required this.onChanged});
+  final void Function(String) onChanged;
+
+  final AppLocalizations translates;
   final String unit;
   final String text;
-  final bool? consumption;
-  final bool? cursor;
-
+  final bool status;
+  final TextEditingController controller;
   @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).colorScheme;
@@ -25,47 +28,40 @@ class PumpRow extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            "$text, $unit",
-            textAlign: TextAlign.center,
-            overflow: TextOverflow.fade,
-            style: Gill(
-              color: white,
-              fontSize: height * 0.025,
-            ),
-          ),
-          Container(
-            color: color.primary,
-            width: width * 0.4,
-            height: height * 0.07,
-            child: Center(
-              child: TextField(
-                onTapOutside: (PointerDownEvent event) =>
-                    FocusManager.instance.primaryFocus?.unfocus(),
-                readOnly: consumption ?? false,
-                showCursor: cursor,
-                cursorColor: color.shadow,
-                textAlign: TextAlign.end,
-                keyboardType: TextInputType.number,
-                style: Segment7(
-                  color: color.shadow,
-                  fontSize: height * 0.05,
-                ),
-                decoration: InputDecoration(
-                  hintText: '0.00',
-                  hintStyle: Segment7(
-                    color: color.shadow,
-                    fontSize: height * 0.05,
-                  ),
-                  contentPadding: EdgeInsets.only(
-                    right: height * 0.005,
-                  ),
-                  border: InputBorder.none,
-                  counterText: '',
-                ),
-                maxLength: 5,
+          SizedBox(
+            width: width * 0.28,
+            child: Text(
+              "$text$unit",
+              textAlign: TextAlign.start,
+              overflow: TextOverflow.ellipsis,
+              style: Gill(
+                color: white,
+                fontSize: height * 0.025,
               ),
             ),
+          ),
+          const Spacer(),
+          Container(
+            color: color.primary,
+            width: width * 0.35,
+            height: height * 0.07,
+            child: Center(
+              child: PumpInput(
+                size: 0.045,
+                height: height,
+                color: color,
+                readOnly: false,
+                width: width,
+                cursor: true,
+                controller: controller,
+                onChanged: onChanged,
+              ),
+            ),
+          ),
+          DotIndicator(
+            height: height,
+            color: color,
+            status: status,
           ),
         ],
       ),

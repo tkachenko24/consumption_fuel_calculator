@@ -5,9 +5,9 @@ class ModeRepository extends StateNotifier<FlexScheme> {
   ModeRepository() : super(FlexScheme.orangeM3);
   FlexScheme switchMode() {
     if (state == FlexScheme.orangeM3) {
-      return FlexScheme.cyanM3;
+      return state = FlexScheme.cyanM3;
     } else {
-      return FlexScheme.orangeM3;
+      return state = FlexScheme.orangeM3;
     }
   }
 }

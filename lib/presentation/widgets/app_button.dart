@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
 
-class AppBarButton extends StatelessWidget {
-  const AppBarButton(
+class AppButton extends StatelessWidget {
+  const AppButton(
       {super.key,
       required this.icon,
       required this.onTap,
-      required this.tooltipText});
+      required this.tooltipText,
+      required this.iconColor,
+      required this.backgroundColor,
+      required this.borderColor,
+      required this.size});
   final String tooltipText;
   final Widget icon;
+  final Color iconColor;
+  final Color backgroundColor;
+  final Color borderColor;
+  final double size;
   final void Function()? onTap;
 
   @override
@@ -20,16 +28,14 @@ class AppBarButton extends StatelessWidget {
         style: ButtonStyle(
           elevation: MaterialStateProperty.all(5),
           enableFeedback: true,
-          iconSize: MaterialStateProperty.all(height * 0.04),
+          iconSize: MaterialStateProperty.all(height * size),
           shadowColor: MaterialStatePropertyAll<Color>(color.shadow),
           shape: MaterialStateProperty.all<ContinuousRectangleBorder>(
-              ContinuousRectangleBorder(
-                  side: BorderSide(color: color.inversePrimary))),
-          backgroundColor:
-              MaterialStatePropertyAll<Color>(color.inversePrimary),
+              ContinuousRectangleBorder(side: BorderSide(color: borderColor))),
+          backgroundColor: MaterialStatePropertyAll<Color>(backgroundColor),
         ),
         splashRadius: height * 0.1,
-        color: color.inverseSurface,
+        color: iconColor,
         tooltip: tooltipText,
         icon: icon,
         onPressed: onTap,

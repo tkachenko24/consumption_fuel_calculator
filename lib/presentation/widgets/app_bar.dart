@@ -19,43 +19,53 @@ class ConsumptionAppBar extends StatelessWidget {
         data: IconThemeData(color: color.onPrimary),
         child: Consumer(builder: (context, ref, child) {
           var theme = ref.read(themeStateProvider.notifier);
-          var themeMode = ref.watch(themeStateProvider);
           var unit = ref.read(unitStateProvider.notifier);
           var mode = ref.read(modeStateProvider.notifier);
           return Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              AppBarButton(
-                tooltipText:
-                    ThemeIconHelper.getThemeIconTooltip(themeMode, translates),
-                icon: ThemeIconHelper.getThemeIcon(themeMode),
+              AppButton(
+                tooltipText: translates.theme_tooltip,
+                icon:
+                    ThemeIconHelper.getThemeIcon(ref.watch(themeStateProvider)),
                 onTap: () {
                   theme.switchTheme();
                 },
+                backgroundColor: color.inversePrimary,
+                borderColor: color.inversePrimary,
+                iconColor: color.inverseSurface,
+                size: 0.04,
               ),
-              AppBarButton(
-                tooltipText: 'TO DO',
-                icon: const Icon(Icons.ev_station_sharp),
+              AppButton(
+                tooltipText: translates.mode_tooltip,
+                icon: ModeIconHelper.getModeIcon(ref.watch(modeStateProvider)),
                 onTap: () {
                   mode.switchMode();
                 },
+                backgroundColor: color.inversePrimary,
+                borderColor: color.inversePrimary,
+                iconColor: color.inverseSurface,
+                size: 0.04,
               ),
-              AppBarButton(
+              AppButton(
                 tooltipText: translates.units_tooltip,
                 icon: const Icon(Icons.scale_sharp),
                 onTap: () {
                   unit.switchUnit();
                 },
+                backgroundColor: color.inversePrimary,
+                borderColor: color.inversePrimary,
+                iconColor: color.inverseSurface,
+                size: 0.04,
               ),
-              AppBarButton(
-                tooltipText: 'TO DO',
-                icon: const Icon(Icons.currency_exchange_sharp),
-                onTap: () {},
-              ),
-              AppBarButton(
+              AppButton(
                 tooltipText: translates.list_tooltip,
                 icon: const Icon(Icons.list_alt_sharp),
                 onTap: () {},
+                backgroundColor: color.inversePrimary,
+                borderColor: color.inversePrimary,
+                iconColor: color.inverseSurface,
+                size: 0.04,
               ),
             ],
           );

@@ -18,12 +18,25 @@ class ConsumptionScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: color.primary,
         toolbarHeight: height * 0.07,
-        title: Text(
-          translates.app_name,
-          style: Gill(
-            color: color.onPrimary,
-            fontSize: height * 0.025,
-          ),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              translates.app_name,
+              style: Gill(
+                color: color.onPrimary,
+                fontSize: height * 0.025,
+              ),
+            ),
+            AppButton(
+                icon: const Icon(Icons.info_sharp),
+                onTap: () {},
+                tooltipText: translates.info_tooltip,
+                iconColor: color.primary,
+                backgroundColor: color.onPrimary,
+                borderColor: color.outline,
+                size: 0.03)
+          ],
         ),
       ),
       body: Pump(),

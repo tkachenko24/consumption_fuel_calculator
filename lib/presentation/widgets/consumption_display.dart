@@ -1,3 +1,4 @@
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vehicle_consumption_calculator/data/export.dart';
 import 'package:vehicle_consumption_calculator/presentation/export.dart';
@@ -22,7 +23,7 @@ class ConsumptionDisplay extends StatelessWidget {
       margin: EdgeInsets.only(top: height * 0.09),
       padding: EdgeInsets.all(height * 0.02),
       color: color.shadow,
-      height: height * 0.2,
+      height: height * 0.24,
       width: width * 0.7,
       child: Center(
         child: Column(
@@ -30,10 +31,15 @@ class ConsumptionDisplay extends StatelessWidget {
           children: [
             Consumer(builder: (context, ref, child) {
               final unit = ref.watch(unitStateProvider);
+              final mode = ref.watch(modeStateProvider) == FlexScheme.orangeM3;
+              final fuelData = ref.watch(fuelDataStateProvider);
+
+              double consumption =
+                  calculateConsumption(fuelData.fuelVolume, fuelData.distance);
               return Text(
-                "${translates.consumption}, ${unit ? translates.metric_consumption : translates.imperial_consumption}",
+                "${translates.consumption}, ${unit ? translates.metric_consumption(mode ? translates.litres : translates.kilowatts) : translates.imperial_consumption(mode ? translates.gallons : translates.kilowatts)}",
                 textAlign: TextAlign.center,
-                overflow: TextOverflow.fade,
+                overflow: TextOverflow.ellipsis,
                 style: Gill(
                   color: Colors.white,
                   fontSize: height * 0.025,
@@ -41,60 +47,55 @@ class ConsumptionDisplay extends StatelessWidget {
               );
             }),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Spacer(),
+                DotIndicator(
+                  height: height,
+                  color: color,
+                  status: true,
+                ),
+                DotIndicator(
+                  height: height,
+                  color: color,
+                  status: true,
+                ),
+                DotIndicator(
+                  height: height,
+                  color: color,
+                  status: false,
+                ),
+                const Spacer(),
+              ],
+            ),
+            Row(
               children: [
                 Expanded(
-                  child: Container(
-                    color: color.primary,
-                    margin: EdgeInsets.only(
-                        right: width * 0.02, left: width * 0.015),
-                    height: height * 0.1,
-                    child: Center(
-                      child: TextField(
-                        onTapOutside: (PointerDownEvent event) =>
-                            FocusManager.instance.primaryFocus?.unfocus(),
+                  child: Column(
+                    children: [
+                      PumpInput(
+                        // ЗУПИНИВСЯ ТУТ
+
+                        height: height,
+                        color: color,
                         readOnly: true,
-                        cursorColor: color.shadow,
-                        textAlign: TextAlign.end,
-                        keyboardType: TextInputType.number,
-                        style: Segment7(
-                          color: color.shadow,
-                          fontSize: height * 0.03,
-                        ),
-                        decoration: InputDecoration(
-                          hintText: '00.00',
-                          hintStyle: Segment7(
-                            color: color.shadow,
-                            fontSize: height * 0.07,
-                          ),
-                          contentPadding: EdgeInsets.only(
-                              top: height * 0.015, right: height * 0.01),
-                          border: InputBorder.none,
-                          counterText: '',
-                        ),
-                        maxLength: 6,
+                        size: 0.07,
+                        width: width,
+                        cursor: false,
+                        controller: TextEditingController(text: ""),
+                        onChanged: (String) {},
                       ),
-                    ),
+                    ],
                   ),
                 ),
-                IconButton(
-                  padding: EdgeInsets.zero,
-                  style: ButtonStyle(
-                    elevation: MaterialStateProperty.all(5),
-                    enableFeedback: true,
-                    iconSize: MaterialStateProperty.all(height * 0.04),
-                    shadowColor: MaterialStatePropertyAll<Color>(color.shadow),
-                    shape: MaterialStateProperty.all<ContinuousRectangleBorder>(
-                        ContinuousRectangleBorder(
-                            side: BorderSide(color: color.outline))),
-                    backgroundColor:
-                        MaterialStatePropertyAll<Color>(color.outline),
-                  ),
-                  splashRadius: height * 0.1,
-                  color: color.onSecondaryContainer,
-                  tooltip: "tooltipText",
-                  icon: const Icon(Icons.save_sharp),
-                  onPressed: () {},
-                ),
+                AppButton(
+                    icon: const Icon(Icons.save_sharp),
+                    onTap: () {},
+                    tooltipText: translates.save_tooltip,
+                    iconColor: color.onSecondaryContainer,
+                    backgroundColor: color.outline,
+                    borderColor: color.outline,
+                    size: 0.04)
               ],
             ),
           ],
