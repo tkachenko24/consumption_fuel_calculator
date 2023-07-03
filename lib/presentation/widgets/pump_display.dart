@@ -26,7 +26,7 @@ class PumpDisplay extends StatelessWidget {
         builder: (context, ref, child) {
           final unit = ref.watch(unitStateProvider);
           final mode = ref.watch(modeStateProvider) == FlexScheme.orangeM3;
-          final fuelData = ref.watch(fuelDataStateProvider);
+          final fuelDataWatch = ref.watch(fuelDataStateProvider);
           return Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -38,12 +38,9 @@ class PumpDisplay extends StatelessWidget {
                         : translates.gallons
                     : translates.kilowatts,
                 translates: translates,
-                status: true,
-                controller: TextEditingController(
-                  text: fuelData.fuelVolume.toString(),
-                ),
+                status: fuelDataWatch.fuelVolume != 0.0,
                 onChanged: (value) {
-                  ref.read(fuelDataStateProvider.notifier).state = fuelData
+                  ref.read(fuelDataStateProvider.notifier).state = fuelDataWatch
                       .copyWith(fuelVolume: double.tryParse(value) ?? 0.0);
                 },
               ),
@@ -51,21 +48,20 @@ class PumpDisplay extends StatelessWidget {
                 text: translates.price,
                 unit: '',
                 translates: translates,
-                status: false,
-                controller: TextEditingController(text: ""),
-                onChanged: (bool) {},
+                status: ref.watch(fuelDataStateProvider).price != 0.0,
+                onChanged: (value) {
+                  ref.read(fuelDataStateProvider.notifier).state = fuelDataWatch
+                      .copyWith(price: double.tryParse(value) ?? 0);
+                },
               ),
               PumpRow(
                 text: translates.distance,
                 unit: unit ? translates.kilometers : translates.miles,
                 translates: translates,
-                status: true,
-                controller: TextEditingController(
-                  text: fuelData.distance.toString(),
-                ),
+                status: ref.watch(fuelDataStateProvider).distance != 0.0,
                 onChanged: (value) {
-                  ref.read(fuelDataStateProvider.notifier).state = fuelData
-                      .copyWith(distance: double.tryParse(value) ?? 0.0);
+                  ref.read(fuelDataStateProvider.notifier).state = fuelDataWatch
+                      .copyWith(distance: double.tryParse(value) ?? 0);
                 },
               ),
             ],

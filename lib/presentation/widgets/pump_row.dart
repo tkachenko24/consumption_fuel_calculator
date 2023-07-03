@@ -2,21 +2,19 @@ import 'package:vehicle_consumption_calculator/data/export.dart';
 import 'package:vehicle_consumption_calculator/presentation/export.dart';
 
 class PumpRow extends StatelessWidget {
-  const PumpRow(
-      {super.key,
-      required this.text,
-      required this.unit,
-      required this.translates,
-      required this.status,
-      required this.controller,
-      required this.onChanged});
+  const PumpRow({
+    super.key,
+    required this.text,
+    required this.unit,
+    required this.translates,
+    required this.status,
+    required this.onChanged,
+  });
   final void Function(String) onChanged;
-
   final AppLocalizations translates;
   final String unit;
   final String text;
   final bool status;
-  final TextEditingController controller;
   @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).colorScheme;
@@ -53,7 +51,6 @@ class PumpRow extends StatelessWidget {
                 readOnly: false,
                 width: width,
                 cursor: true,
-                controller: controller,
                 onChanged: onChanged,
               ),
             ),

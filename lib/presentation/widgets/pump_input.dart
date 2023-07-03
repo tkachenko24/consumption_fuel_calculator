@@ -2,16 +2,16 @@ import 'package:flutter/services.dart';
 import 'package:vehicle_consumption_calculator/presentation/export.dart';
 
 class PumpInput extends StatelessWidget {
-  const PumpInput(
-      {super.key,
-      required this.height,
-      required this.width,
-      required this.color,
-      required this.readOnly,
-      required this.size,
-      required this.cursor,
-      required this.controller,
-      required this.onChanged});
+  const PumpInput({
+    super.key,
+    required this.height,
+    required this.width,
+    required this.color,
+    required this.readOnly,
+    required this.size,
+    required this.cursor,
+    required this.onChanged,
+  });
   final bool readOnly;
   final bool cursor;
   final double height;
@@ -19,7 +19,6 @@ class PumpInput extends StatelessWidget {
   final double size;
   final void Function(String) onChanged;
   final ColorScheme color;
-  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +29,6 @@ class PumpInput extends StatelessWidget {
       child: Center(
         child: TextField(
           onChanged: onChanged,
-          controller: controller,
           inputFormatters: [
             FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
           ],
@@ -44,7 +42,7 @@ class PumpInput extends StatelessWidget {
           showCursor: cursor,
           cursorColor: color.shadow,
           textAlign: TextAlign.end,
-          keyboardType: TextInputType.number,
+          keyboardType: TextInputType.datetime,
           style: Segment7(
             color: color.shadow,
             fontSize: height * size,

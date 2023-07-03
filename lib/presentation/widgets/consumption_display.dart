@@ -26,80 +26,73 @@ class ConsumptionDisplay extends StatelessWidget {
       height: height * 0.24,
       width: width * 0.7,
       child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Consumer(builder: (context, ref, child) {
-              final unit = ref.watch(unitStateProvider);
-              final mode = ref.watch(modeStateProvider) == FlexScheme.orangeM3;
-              final fuelData = ref.watch(fuelDataStateProvider);
+        child: Consumer(builder: (context, ref, child) {
+          final fuelData = ref.watch(fuelDataStateProvider);
+          double consumption =
+              calculateConsumption(fuelData.fuelVolume, fuelData.distance, ref);
 
-              double consumption =
-                  calculateConsumption(fuelData.fuelVolume, fuelData.distance);
-              return Text(
-                "${translates.consumption}, ${unit ? translates.metric_consumption(mode ? translates.litres : translates.kilowatts) : translates.imperial_consumption(mode ? translates.gallons : translates.kilowatts)}",
-                textAlign: TextAlign.center,
-                overflow: TextOverflow.ellipsis,
-                style: Gill(
-                  color: Colors.white,
-                  fontSize: height * 0.025,
-                ),
-              );
-            }),
-            Row(
+          final unit = ref.watch(unitStateProvider);
+          final mode = ref.watch(modeStateProvider) == FlexScheme.orangeM3;
+          return Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Spacer(),
-                DotIndicator(
-                  height: height,
-                  color: color,
-                  status: true,
-                ),
-                DotIndicator(
-                  height: height,
-                  color: color,
-                  status: true,
-                ),
-                DotIndicator(
-                  height: height,
-                  color: color,
-                  status: false,
-                ),
-                const Spacer(),
-              ],
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: Column(
-                    children: [
-                      PumpInput(
-                        // ЗУПИНИВСЯ ТУТ
-
-                        height: height,
-                        color: color,
-                        readOnly: true,
-                        size: 0.07,
-                        width: width,
-                        cursor: false,
-                        controller: TextEditingController(text: ""),
-                        onChanged: (String) {},
-                      ),
-                    ],
+                Text(
+                  "${translates.consumption}, ${unit ? translates.metric_consumption(mode ? translates.litres : translates.kilowatts) : translates.imperial_consumption(mode ? translates.gallons : translates.kilowatts)}",
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.ellipsis,
+                  style: Gill(
+                    color: Colors.white,
+                    fontSize: height * 0.025,
                   ),
                 ),
-                AppButton(
-                    icon: const Icon(Icons.save_sharp),
-                    onTap: () {},
-                    tooltipText: translates.save_tooltip,
-                    iconColor: color.onSecondaryContainer,
-                    backgroundColor: color.outline,
-                    borderColor: color.outline,
-                    size: 0.04)
-              ],
-            ),
-          ],
-        ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Spacer(),
+                    DotIndicator(
+                      height: height,
+                      color: color,
+                      status: fuelData.fuelVolume != 0,
+                    ),
+                    DotIndicator(
+                      height: height,
+                      color: color,
+                      status: fuelData.price != 0.0,
+                    ),
+                    DotIndicator(
+                      height: height,
+                      color: color,
+                      status: fuelData.distance != 0,
+                    ),
+                    const Spacer(),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Container(
+                      color: color.primary,
+                      width: width * 0.47,
+                      height: height * 0.1,
+                      child: Text(
+                        "${consumption.toStringAsFixed(2)}   ",
+                        textAlign: TextAlign.end,
+                        style: Segment7(
+                            color: color.shadow, fontSize: height * 0.08),
+                      ),
+                    ),
+                    const Spacer(),
+                    AppButton(
+                        icon: const Icon(Icons.save_sharp),
+                        onTap: () {},
+                        tooltipText: translates.save_tooltip,
+                        iconColor: color.onSecondaryContainer,
+                        backgroundColor: color.outline,
+                        borderColor: color.outline,
+                        size: 0.04)
+                  ],
+                ),
+              ]);
+        }),
       ),
     );
   }

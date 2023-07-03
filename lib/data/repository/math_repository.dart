@@ -1,30 +1,39 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:vehicle_consumption_calculator/data/repository/unit_repository.dart';
 
 class FuelData {
-  double fuelVolume;
   double distance;
+  double price;
+  double fuelVolume;
 
   FuelData({
-    this.fuelVolume = 0.0,
     this.distance = 0.0,
+    this.price = 0.0,
+    this.fuelVolume = 0.0,
   });
 
   FuelData copyWith({
-    double? fuelVolume,
     double? distance,
+    double? price,
+    double? fuelVolume,
   }) {
     return FuelData(
       fuelVolume: fuelVolume ?? this.fuelVolume,
+      price: price ?? this.price,
       distance: distance ?? this.distance,
     );
   }
 }
 
-double calculateConsumption(double fuelVolume, double distance) {
+double calculateConsumption(double fuelVolume, double distance, WidgetRef ref) {
   if (distance == 0) {
     return 0;
   }
-  return (fuelVolume / distance) * 100;
+  if (ref.watch(unitStateProvider)) {
+    return (fuelVolume / distance) * 100;
+  } else {
+    return distance / fuelVolume;
+  }
 }
 
 final fuelDataStateProvider = StateProvider<FuelData>((ref) => FuelData());
