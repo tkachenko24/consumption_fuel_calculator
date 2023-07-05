@@ -3,14 +3,34 @@ import 'package:vehicle_consumption_calculator/data/export.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ConsumptionAppBar extends StatelessWidget {
-  const ConsumptionAppBar({Key? key}) : super(key: key);
+  const ConsumptionAppBar({
+    super.key,
+    required this.translates,
+    required this.height,
+    required this.color,
+  });
+  final AppLocalizations translates;
+  final double height;
+  final ColorScheme color;
+
+  void showConsumptionSheet(BuildContext context) {
+    showModalBottomSheet(
+      elevation: 10,
+      backgroundColor: color.onPrimary,
+      context: context,
+      isScrollControlled: true,
+      shape: const ContinuousRectangleBorder(),
+      builder: (context) {
+        return ConsumptionSheet(
+          height: height,
+          color: color,
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    final translates = AppLocalizations.of(context)!;
-    final color = Theme.of(context).colorScheme;
-    var height = MediaQuery.of(context).size.height;
-
     return BottomAppBar(
       height: height * 0.15,
       elevation: 0,
@@ -35,6 +55,8 @@ class ConsumptionAppBar extends StatelessWidget {
                 borderColor: color.inversePrimary,
                 iconColor: color.inverseSurface,
                 size: 0.04,
+                color: color,
+                height: height,
               ),
               AppButton(
                 tooltipText: translates.mode_tooltip,
@@ -46,6 +68,8 @@ class ConsumptionAppBar extends StatelessWidget {
                 borderColor: color.inversePrimary,
                 iconColor: color.inverseSurface,
                 size: 0.04,
+                color: color,
+                height: height,
               ),
               AppButton(
                 tooltipText: translates.units_tooltip,
@@ -57,15 +81,21 @@ class ConsumptionAppBar extends StatelessWidget {
                 borderColor: color.inversePrimary,
                 iconColor: color.inverseSurface,
                 size: 0.04,
+                color: color,
+                height: height,
               ),
               AppButton(
                 tooltipText: translates.list_tooltip,
                 icon: const Icon(Icons.list_alt_sharp),
-                onTap: () {},
+                onTap: () {
+                  showConsumptionSheet(context);
+                },
                 backgroundColor: color.inversePrimary,
                 borderColor: color.inversePrimary,
                 iconColor: color.inverseSurface,
                 size: 0.04,
+                color: color,
+                height: height,
               ),
             ],
           );

@@ -12,56 +12,46 @@ class PumpInput extends StatelessWidget {
     required this.cursor,
     required this.onChanged,
   });
-  final bool readOnly;
-  final bool cursor;
-  final double height;
-  final double width;
-  final double size;
+  final bool readOnly, cursor;
+  final double height, size, width;
   final void Function(String) onChanged;
   final ColorScheme color;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: color.primary,
-      margin: EdgeInsets.only(right: width * 0.02, left: width * 0.015),
-      height: height * 0.1,
-      child: Center(
-        child: TextField(
-          onChanged: onChanged,
-          inputFormatters: [
-            FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
-          ],
-          cursorHeight: height * 0.05,
-          textAlignVertical: TextAlignVertical.center,
-          cursorOpacityAnimates: false,
-          autocorrect: false,
-          onTapOutside: (PointerDownEvent event) =>
-              FocusManager.instance.primaryFocus?.unfocus(),
-          readOnly: readOnly,
-          showCursor: cursor,
-          cursorColor: color.shadow,
-          textAlign: TextAlign.end,
-          keyboardType: TextInputType.datetime,
-          style: Segment7(
-            color: color.shadow,
-            fontSize: height * size,
-          ),
-          decoration: InputDecoration(
-            hintText: 0.0.toString(),
-            hintStyle: Segment7(
-              color: color.shadow,
-              fontSize: height * size,
-            ),
-            contentPadding: EdgeInsets.only(
-              right: height * 0.005,
-            ),
-            border: InputBorder.none,
-            counterText: '',
-          ),
-          maxLength: 5,
-        ),
+    return TextField(
+      onChanged: onChanged,
+      inputFormatters: [
+        FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
+      ],
+      cursorHeight: height * 0.05,
+      textAlignVertical: TextAlignVertical.center,
+      cursorOpacityAnimates: false,
+      autocorrect: false,
+      onTapOutside: (PointerDownEvent event) =>
+          FocusManager.instance.primaryFocus?.unfocus(),
+      readOnly: readOnly,
+      showCursor: cursor,
+      cursorColor: color.shadow,
+      textAlign: TextAlign.end,
+      keyboardType: TextInputType.datetime,
+      style: Segment7(
+        color: color.shadow,
+        fontSize: height * size,
       ),
+      decoration: InputDecoration(
+        hintText: 0.0.toString(),
+        hintStyle: Segment7(
+          color: color.shadow,
+          fontSize: height * size,
+        ),
+        contentPadding: EdgeInsets.all(
+          height * 0.005,
+        ),
+        border: InputBorder.none,
+        counterText: '',
+      ),
+      maxLength: 5,
     );
   }
 }

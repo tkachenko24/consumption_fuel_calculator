@@ -9,10 +9,11 @@ class PumpDisplay extends StatelessWidget {
     required this.color,
     required this.height,
     required this.translates,
+    required this.width,
   });
   final AppLocalizations translates;
   final ColorScheme color;
-  final double height;
+  final double height, width;
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +44,9 @@ class PumpDisplay extends StatelessWidget {
                   ref.read(fuelDataStateProvider.notifier).state = fuelDataWatch
                       .copyWith(fuelVolume: double.tryParse(value) ?? 0.0);
                 },
+                color: color,
+                height: height,
+                width: width,
               ),
               PumpRow(
                 text: translates.price,
@@ -53,6 +57,9 @@ class PumpDisplay extends StatelessWidget {
                   ref.read(fuelDataStateProvider.notifier).state = fuelDataWatch
                       .copyWith(price: double.tryParse(value) ?? 0);
                 },
+                color: color,
+                height: height,
+                width: width,
               ),
               PumpRow(
                 text: translates.distance,
@@ -63,6 +70,9 @@ class PumpDisplay extends StatelessWidget {
                   ref.read(fuelDataStateProvider.notifier).state = fuelDataWatch
                       .copyWith(distance: double.tryParse(value) ?? 0);
                 },
+                color: color,
+                height: height,
+                width: width,
               ),
             ],
           );

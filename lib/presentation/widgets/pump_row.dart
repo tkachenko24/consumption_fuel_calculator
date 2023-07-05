@@ -8,19 +8,20 @@ class PumpRow extends StatelessWidget {
     required this.unit,
     required this.translates,
     required this.status,
+    required this.height,
+    required this.width,
     required this.onChanged,
+    required this.color,
   });
   final void Function(String) onChanged;
   final AppLocalizations translates;
-  final String unit;
-  final String text;
+  final String unit, text;
+  final double height, width;
   final bool status;
+  final ColorScheme color;
+
   @override
   Widget build(BuildContext context) {
-    final color = Theme.of(context).colorScheme;
-    const Color white = Colors.white;
-    var height = MediaQuery.of(context).size.height;
-    var width = MediaQuery.of(context).size.width;
     return Padding(
       padding: EdgeInsets.only(top: height * 0.01, bottom: height * 0.01),
       child: Row(
@@ -33,7 +34,7 @@ class PumpRow extends StatelessWidget {
               textAlign: TextAlign.start,
               overflow: TextOverflow.ellipsis,
               style: Gill(
-                color: white,
+                color: Colors.white,
                 fontSize: height * 0.025,
               ),
             ),

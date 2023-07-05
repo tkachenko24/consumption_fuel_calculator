@@ -13,13 +13,22 @@ class DotIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 400),
+      curve: Curves.bounceIn,
       margin: EdgeInsets.all(
         height * 0.02,
       ),
       height: 10,
       width: 10,
       decoration: BoxDecoration(
+          boxShadow: List.filled(
+              7,
+              BoxShadow(
+                  blurStyle: BlurStyle.solid,
+                  blurRadius: 4,
+                  color:
+                      status ? color.tertiaryContainer : color.errorContainer)),
           shape: BoxShape.circle,
           color: status ? color.tertiaryContainer : color.errorContainer),
     );

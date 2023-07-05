@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'package:vehicle_consumption_calculator/presentation/export.dart';
 import 'package:vehicle_consumption_calculator/data/export.dart';
 
@@ -11,6 +9,7 @@ class ConsumptionScreen extends StatelessWidget {
     final translates = AppLocalizations.of(context)!;
     final color = Theme.of(context).colorScheme;
     var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       extendBody: true,
@@ -29,18 +28,30 @@ class ConsumptionScreen extends StatelessWidget {
               ),
             ),
             AppButton(
-                icon: const Icon(Icons.info_sharp),
-                onTap: () {},
-                tooltipText: translates.info_tooltip,
-                iconColor: color.primary,
-                backgroundColor: color.onPrimary,
-                borderColor: color.outline,
-                size: 0.03)
+              icon: const Icon(Icons.info_sharp),
+              onTap: () {},
+              tooltipText: translates.info_tooltip,
+              iconColor: color.primary,
+              backgroundColor: color.onPrimary,
+              borderColor: color.outline,
+              size: 0.03,
+              color: color,
+              height: height,
+            )
           ],
         ),
       ),
-      body: Pump(),
-      bottomNavigationBar: ConsumptionAppBar(),
+      body: Pump(
+        color: color,
+        height: height,
+        translates: translates,
+        width: width,
+      ),
+      bottomNavigationBar: ConsumptionAppBar(
+        color: color,
+        height: height,
+        translates: translates,
+      ),
     );
   }
 }

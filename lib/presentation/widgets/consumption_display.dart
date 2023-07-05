@@ -30,7 +30,6 @@ class ConsumptionDisplay extends StatelessWidget {
           final fuelData = ref.watch(fuelDataStateProvider);
           double consumption =
               calculateConsumption(fuelData.fuelVolume, fuelData.distance, ref);
-
           final unit = ref.watch(unitStateProvider);
           final mode = ref.watch(modeStateProvider) == FlexScheme.orangeM3;
           return Column(
@@ -57,7 +56,7 @@ class ConsumptionDisplay extends StatelessWidget {
                     DotIndicator(
                       height: height,
                       color: color,
-                      status: fuelData.price != 0.0,
+                      status: fuelData.price != 0,
                     ),
                     DotIndicator(
                       height: height,
@@ -70,6 +69,7 @@ class ConsumptionDisplay extends StatelessWidget {
                 Row(
                   children: [
                     Container(
+                      padding: EdgeInsets.all(height * 0.005),
                       color: color.primary,
                       width: width * 0.47,
                       height: height * 0.1,
@@ -82,13 +82,24 @@ class ConsumptionDisplay extends StatelessWidget {
                     ),
                     const Spacer(),
                     AppButton(
-                        icon: const Icon(Icons.save_sharp),
-                        onTap: () {},
-                        tooltipText: translates.save_tooltip,
-                        iconColor: color.onSecondaryContainer,
-                        backgroundColor: color.outline,
-                        borderColor: color.outline,
-                        size: 0.04)
+                      icon: const Icon(Icons.save_sharp),
+                      onTap: () {
+                        if (fuelData.distance != 0 &&
+                            fuelData.price != 0 &&
+                            fuelData.fuelVolume != 0) {
+                          return print(Text("acces granted"));
+                        } else {
+                          return print(Text("access denied"));
+                        }
+                      },
+                      tooltipText: translates.save_tooltip,
+                      iconColor: color.onSecondaryContainer,
+                      backgroundColor: color.outline,
+                      borderColor: color.outline,
+                      size: 0.04,
+                      color: color,
+                      height: height,
+                    )
                   ],
                 ),
               ]);

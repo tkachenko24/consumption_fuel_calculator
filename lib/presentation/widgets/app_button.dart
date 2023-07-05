@@ -1,27 +1,27 @@
 import 'package:flutter/material.dart';
 
 class AppButton extends StatelessWidget {
-  const AppButton(
-      {super.key,
-      required this.icon,
-      required this.onTap,
-      required this.tooltipText,
-      required this.iconColor,
-      required this.backgroundColor,
-      required this.borderColor,
-      required this.size});
+  const AppButton({
+    super.key,
+    required this.icon,
+    required this.onTap,
+    required this.tooltipText,
+    required this.iconColor,
+    required this.backgroundColor,
+    required this.borderColor,
+    required this.size,
+    required this.height,
+    required this.color,
+  });
   final String tooltipText;
   final Widget icon;
-  final Color iconColor;
-  final Color backgroundColor;
-  final Color borderColor;
-  final double size;
+  final Color iconColor, backgroundColor, borderColor;
+  final ColorScheme color;
+  final double size, height;
   final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
-    final color = Theme.of(context).colorScheme;
-    var height = MediaQuery.of(context).size.height;
     return Padding(
       padding: EdgeInsets.all(height * 0.001),
       child: IconButton(
