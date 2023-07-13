@@ -1,7 +1,6 @@
-import 'package:flex_color_scheme/flex_color_scheme.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vehicle_consumption_calculator/data/export.dart';
 import 'package:vehicle_consumption_calculator/presentation/export.dart';
+import 'package:vehicle_consumption_calculator/domain/export.dart';
 
 class PumpDisplay extends StatelessWidget {
   const PumpDisplay({
@@ -47,6 +46,7 @@ class PumpDisplay extends StatelessWidget {
                 color: color,
                 height: height,
                 width: width,
+                textInputAction: TextInputAction.next,
               ),
               PumpRow(
                 text: translates.price,
@@ -60,6 +60,7 @@ class PumpDisplay extends StatelessWidget {
                 color: color,
                 height: height,
                 width: width,
+                textInputAction: TextInputAction.next,
               ),
               PumpRow(
                 text: translates.distance,
@@ -73,6 +74,7 @@ class PumpDisplay extends StatelessWidget {
                 color: color,
                 height: height,
                 width: width,
+                textInputAction: TextInputAction.done,
               ),
             ],
           );

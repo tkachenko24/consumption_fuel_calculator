@@ -7,3 +7,4 @@ export 'package:flutter/material.dart';
 export 'consumption_display.dart';
 export 'pump_input.dart';
 export 'dot_indicator.dart';
+export 'app_bar.dart';

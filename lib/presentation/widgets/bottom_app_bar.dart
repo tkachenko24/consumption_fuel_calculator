@@ -1,9 +1,9 @@
 import 'package:vehicle_consumption_calculator/presentation/export.dart';
 import 'package:vehicle_consumption_calculator/data/export.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:vehicle_consumption_calculator/domain/export.dart';
 
-class ConsumptionAppBar extends StatelessWidget {
-  const ConsumptionAppBar({
+class ConsumptionBottomAppBar extends StatelessWidget {
+  const ConsumptionBottomAppBar({
     super.key,
     required this.translates,
     required this.height,
@@ -12,22 +12,6 @@ class ConsumptionAppBar extends StatelessWidget {
   final AppLocalizations translates;
   final double height;
   final ColorScheme color;
-
-  void showConsumptionSheet(BuildContext context) {
-    showModalBottomSheet(
-      elevation: 10,
-      backgroundColor: color.onPrimary,
-      context: context,
-      isScrollControlled: true,
-      shape: const ContinuousRectangleBorder(),
-      builder: (context) {
-        return ConsumptionSheet(
-          height: height,
-          color: color,
-        );
-      },
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,9 +22,9 @@ class ConsumptionAppBar extends StatelessWidget {
       child: IconTheme(
         data: IconThemeData(color: color.onPrimary),
         child: Consumer(builder: (context, ref, child) {
-          var theme = ref.read(themeStateProvider.notifier);
-          var unit = ref.read(unitStateProvider.notifier);
-          var mode = ref.read(modeStateProvider.notifier);
+          var theme = ref.read(themeStateProvider.notifier),
+              unit = ref.read(unitStateProvider.notifier),
+              mode = ref.read(modeStateProvider.notifier);
           return Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
@@ -88,7 +72,7 @@ class ConsumptionAppBar extends StatelessWidget {
                 tooltipText: translates.list_tooltip,
                 icon: const Icon(Icons.list_alt_sharp),
                 onTap: () {
-                  showConsumptionSheet(context);
+                  showConsumptionSheet(context, ref, color, height, translates);
                 },
                 backgroundColor: color.inversePrimary,
                 borderColor: color.inversePrimary,

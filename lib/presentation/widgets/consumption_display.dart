@@ -1,7 +1,6 @@
-import 'package:flex_color_scheme/flex_color_scheme.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vehicle_consumption_calculator/data/export.dart';
 import 'package:vehicle_consumption_calculator/presentation/export.dart';
+import 'package:vehicle_consumption_calculator/domain/export.dart';
 
 class ConsumptionDisplay extends StatelessWidget {
   const ConsumptionDisplay({
@@ -12,9 +11,8 @@ class ConsumptionDisplay extends StatelessWidget {
     required this.translates,
   });
 
-  final double height;
+  final double height, width;
   final ColorScheme color;
-  final double width;
   final AppLocalizations translates;
 
   @override
@@ -24,14 +22,14 @@ class ConsumptionDisplay extends StatelessWidget {
       padding: EdgeInsets.all(height * 0.02),
       color: color.shadow,
       height: height * 0.24,
-      width: width * 0.7,
+      width: width * 0.72,
       child: Center(
         child: Consumer(builder: (context, ref, child) {
-          final fuelData = ref.watch(fuelDataStateProvider);
-          double consumption =
-              calculateConsumption(fuelData.fuelVolume, fuelData.distance, ref);
-          final unit = ref.watch(unitStateProvider);
-          final mode = ref.watch(modeStateProvider) == FlexScheme.orangeM3;
+          final fuelData = ref.watch(fuelDataStateProvider),
+              unit = ref.watch(unitStateProvider),
+              mode = ref.watch(modeStateProvider) == FlexScheme.orangeM3;
+          double consumption = calculateConsumption(
+              fuelData.fuelVolume, fuelData.distance, fuelData.price, ref);
           return Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -74,7 +72,7 @@ class ConsumptionDisplay extends StatelessWidget {
                       width: width * 0.47,
                       height: height * 0.1,
                       child: Text(
-                        "${consumption.toStringAsFixed(2)}   ",
+                        consumption.toStringAsFixed(2),
                         textAlign: TextAlign.end,
                         style: Segment7(
                             color: color.shadow, fontSize: height * 0.08),
@@ -83,15 +81,13 @@ class ConsumptionDisplay extends StatelessWidget {
                     const Spacer(),
                     AppButton(
                       icon: const Icon(Icons.save_sharp),
-                      onTap: () {
-                        if (fuelData.distance != 0 &&
-                            fuelData.price != 0 &&
-                            fuelData.fuelVolume != 0) {
-                          return print(Text("acces granted"));
-                        } else {
-                          return print(Text("access denied"));
-                        }
-                      },
+                      onTap: fuelData.distance != 0 &&
+                              fuelData.price != 0 &&
+                              fuelData.fuelVolume != 0
+                          ? () async {
+                              ref.read(dataBaseStateProvider).saveData(ref);
+                            }
+                          : null,
                       tooltipText: translates.save_tooltip,
                       iconColor: color.onSecondaryContainer,
                       backgroundColor: color.outline,

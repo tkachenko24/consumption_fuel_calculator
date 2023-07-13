@@ -12,6 +12,4 @@ class Gill extends TextStyle {
     required this.color,
     required this.fontSize,
   });
-  @override
-  String? get fontFamily => "GillSans";
 }

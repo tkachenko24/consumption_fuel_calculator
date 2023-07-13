@@ -11,11 +11,13 @@ class PumpInput extends StatelessWidget {
     required this.size,
     required this.cursor,
     required this.onChanged,
+    required this.textInputAction,
   });
   final bool readOnly, cursor;
   final double height, size, width;
   final void Function(String) onChanged;
   final ColorScheme color;
+  final TextInputAction textInputAction;
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +27,7 @@ class PumpInput extends StatelessWidget {
         FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
       ],
       cursorHeight: height * 0.05,
+      textInputAction: textInputAction,
       textAlignVertical: TextAlignVertical.center,
       cursorOpacityAnimates: false,
       autocorrect: false,

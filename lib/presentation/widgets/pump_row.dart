@@ -12,6 +12,7 @@ class PumpRow extends StatelessWidget {
     required this.width,
     required this.onChanged,
     required this.color,
+    required this.textInputAction,
   });
   final void Function(String) onChanged;
   final AppLocalizations translates;
@@ -19,6 +20,7 @@ class PumpRow extends StatelessWidget {
   final double height, width;
   final bool status;
   final ColorScheme color;
+  final TextInputAction textInputAction;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +37,7 @@ class PumpRow extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
               style: Gill(
                 color: Colors.white,
-                fontSize: height * 0.025,
+                fontSize: height * 0.02,
               ),
             ),
           ),
@@ -53,6 +55,7 @@ class PumpRow extends StatelessWidget {
                 width: width,
                 cursor: true,
                 onChanged: onChanged,
+                textInputAction: textInputAction,
               ),
             ),
           ),
