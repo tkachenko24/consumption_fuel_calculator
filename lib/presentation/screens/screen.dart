@@ -18,6 +18,7 @@ class ConsumptionScreen extends StatelessWidget {
         color: color,
         translates: translates,
         height: height,
+        info: false,
       ),
       body: Pump(
         color: color,

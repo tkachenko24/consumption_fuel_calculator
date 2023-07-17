@@ -21,6 +21,10 @@ class ConsumptionApp extends ConsumerWidget {
       theme: FlexColorScheme.light(scheme: mode, useMaterial3: true).toTheme,
       darkTheme: FlexColorScheme.dark(scheme: mode, useMaterial3: true).toTheme,
       themeMode: ref.watch(themeStateProvider),
+      routes: <String, WidgetBuilder>{
+        '/screen': (BuildContext context) => const ConsumptionScreen(),
+        '/info': (BuildContext context) => const InfoScreen(),
+      },
       home: const ConsumptionScreen(),
     );
   }

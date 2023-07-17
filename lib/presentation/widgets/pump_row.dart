@@ -34,7 +34,7 @@ class PumpRow extends StatelessWidget {
             child: Text(
               "$text$unit",
               textAlign: TextAlign.start,
-              overflow: TextOverflow.ellipsis,
+              overflow: TextOverflow.visible,
               style: Gill(
                 color: Colors.white,
                 fontSize: height * 0.02,
