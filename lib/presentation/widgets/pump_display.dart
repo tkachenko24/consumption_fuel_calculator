@@ -20,7 +20,7 @@ class PumpDisplay extends StatelessWidget {
       color: color.shadow,
       height: height * 0.32,
       padding: EdgeInsets.all(
-        height * 0.02,
+        height * 0.01,
       ),
       child: Consumer(
         builder: (context, ref, child) {

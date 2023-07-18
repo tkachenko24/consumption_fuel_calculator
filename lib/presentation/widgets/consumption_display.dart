@@ -39,7 +39,7 @@ class ConsumptionDisplay extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   style: Gill(
                     color: Colors.white,
-                    fontSize: height * 0.025,
+                    fontSize: height * 0.022,
                   ),
                 ),
                 Row(
