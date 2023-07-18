@@ -15,7 +15,8 @@ class ConsumptionApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     var mode = ref.watch(modeStateProvider);
     return MaterialApp(
-      title: 'Consumption Consumption Calculator',
+      debugShowCheckedModeBanner: false,
+      title: 'Vehicle Consumption Calculator',
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       theme: FlexColorScheme.light(scheme: mode, useMaterial3: true).toTheme,

@@ -28,6 +28,7 @@ class InfoScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  InfoDivider(height: height),
                   Text(
                     translates.about_title,
                     style: TextStyle(
@@ -111,7 +112,7 @@ class InfoDivider extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: height * 0.02,
-      child: Divider(),
+      child: const Divider(),
     );
   }
 }
