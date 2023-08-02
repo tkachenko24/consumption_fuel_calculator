@@ -1,4 +1,4 @@
-import 'package:vehicle_consumption_calculator/domain/export.dart';
+import 'package:vehicle_consumption_calculator/fuel_calculator/providers/export.dart';
 
 abstract class ConsumptionCalculator {
   calculateConsumption(

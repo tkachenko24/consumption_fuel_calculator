@@ -51,7 +51,6 @@ class ConsumptionBottomAppBar extends StatelessWidget {
                 icon: ModeIconHelper.getModeIcon(ref.watch(modeStateProvider)),
                 onTap: () {
                   mode.switchMode();
-                  print(ref.watch(themeStateProvider));
                 },
                 backgroundColor: color.inversePrimary,
                 borderColor: color.inversePrimary,

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:vehicle_consumption_calculator/domain/export.dart';
+import 'package:vehicle_consumption_calculator/fuel_calculator/services/theme/export.dart';
 
 final themeStateProvider =
-    StateNotifierProvider<ThemeRepository, ThemeMode>((ref) {
-  final themeRepo = ThemeRepository();
+    StateNotifierProvider<ThemeAppImpl, ThemeMode>((ref) {
+  final themeRepo = ThemeAppImpl();
   themeRepo.loadSelectedTheme();
   return themeRepo;
 });

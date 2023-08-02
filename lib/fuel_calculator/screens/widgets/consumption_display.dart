@@ -1,10 +1,8 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:vehicle_consumption_calculator/fuel_calculator/components/export.dart';
-import 'package:vehicle_consumption_calculator/fuel_calculator/models/data_base.dart';
 import 'package:vehicle_consumption_calculator/fuel_calculator/providers/export.dart';
 import 'package:vehicle_consumption_calculator/fuel_calculator/screens/widgets/export.dart';
 import 'package:vehicle_consumption_calculator/fuel_calculator/services/data_base/interface.dart';
-import 'package:vehicle_consumption_calculator/fuel_calculator/services/data_base/service.dart';
 import 'package:vehicle_consumption_calculator/fuel_calculator/services/math/interface.dart';
 import 'package:vehicle_consumption_calculator/fuel_calculator/services/math/service.dart';
 
@@ -96,6 +94,7 @@ class ConsumptionDisplay extends StatelessWidget {
                           ? () async {
                               db?.saveData(ref);
                               print(consumption!.toStringAsFixed(2));
+                              print(db?.loadSavedData(ref));
                             }
                           : null,
                       tooltipText: translates.save_tooltip,

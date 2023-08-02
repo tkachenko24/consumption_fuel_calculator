@@ -1,11 +1,12 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:vehicle_consumption_calculator/fuel_calculator/providers/export.dart';
+import 'package:vehicle_consumption_calculator/fuel_calculator/services/unit/export.dart';
 
-class UnitRepository extends StateNotifier<bool> {
-  UnitRepository(bool initialValue) : super(initialValue);
-
+class UnitAppImpl extends StateNotifier<bool> implements UnitApp {
+  UnitAppImpl(bool initialValue) : super(initialValue);
   static const String _unitKey = 'selected_unit';
 
+  @override
   Future<void> switchUnit() async {
     state = !state;
 
@@ -13,6 +14,7 @@ class UnitRepository extends StateNotifier<bool> {
     await prefs.setBool(_unitKey, state);
   }
 
+  @override
   Future<void> loadSelectedUnit() async {
     final prefs = await SharedPreferences.getInstance();
     final selectedUnit = prefs.getBool(_unitKey);
@@ -22,9 +24,3 @@ class UnitRepository extends StateNotifier<bool> {
     }
   }
 }
-
-final unitStateProvider = StateNotifierProvider<UnitRepository, bool>((ref) {
-  final unitRepo = UnitRepository(true);
-  unitRepo.loadSelectedUnit();
-  return unitRepo;
-});

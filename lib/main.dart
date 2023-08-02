@@ -1,7 +1,7 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/services.dart';
-import 'package:vehicle_consumption_calculator/domain/export.dart';
 import 'package:vehicle_consumption_calculator/fuel_calculator/components/export.dart';
+import 'package:vehicle_consumption_calculator/fuel_calculator/providers/export.dart';
 import 'package:vehicle_consumption_calculator/fuel_calculator/screens/export.dart';
 import 'package:vehicle_consumption_calculator/fuel_calculator/screens/widgets/export.dart';
 

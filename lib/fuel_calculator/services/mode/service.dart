@@ -1,12 +1,14 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:vehicle_consumption_calculator/fuel_calculator/providers/export.dart';
+import 'package:vehicle_consumption_calculator/fuel_calculator/services/mode/export.dart';
 
-class ModeRepository extends StateNotifier<FlexScheme> {
-  ModeRepository() : super(FlexScheme.orangeM3);
+class ModeAppImpl extends StateNotifier<FlexScheme> implements ModeApp {
+  ModeAppImpl() : super(FlexScheme.orangeM3);
 
   static const String _modeKey = 'selected_mode';
 
+  @override
   Future<void> switchMode() async {
     if (state == FlexScheme.orangeM3) {
       state = FlexScheme.cyanM3;
@@ -18,6 +20,7 @@ class ModeRepository extends StateNotifier<FlexScheme> {
     await prefs.setString(_modeKey, state.toString());
   }
 
+  @override
   Future<void> loadSelectedMode() async {
     final prefs = await SharedPreferences.getInstance();
     final modeString = prefs.getString(_modeKey);
@@ -30,10 +33,3 @@ class ModeRepository extends StateNotifier<FlexScheme> {
     }
   }
 }
-
-final modeStateProvider =
-    StateNotifierProvider<ModeRepository, FlexScheme>((ref) {
-  final modeRepo = ModeRepository();
-  modeRepo.loadSelectedMode();
-  return modeRepo;
-});

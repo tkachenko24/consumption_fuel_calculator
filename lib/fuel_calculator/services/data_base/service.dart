@@ -6,12 +6,14 @@ import 'package:vehicle_consumption_calculator/fuel_calculator/services/data_bas
 import 'package:vehicle_consumption_calculator/fuel_calculator/services/math/export.dart';
 
 class DataBaseImpl implements DataBase {
-  final ConsumptionCalculator calculator;
   final DataBaseModel db;
 
-  DataBaseImpl(this.calculator, this.db);
+  DataBaseImpl(this.db);
   @override
-  Future<void> saveData(WidgetRef ref) async {
+  Future<void> saveData(
+    WidgetRef ref,
+  ) async {
+    final ConsumptionCalculator calculator = ConsumptionCalculatorImpl();
     final fuelData = ref.watch(fuelDataStateProvider),
         now = DateTime.now(),
         formatter = DateFormat('dd.MM.yy HH:mm'),
