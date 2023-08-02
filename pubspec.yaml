@@ -7,6 +7,7 @@ environment:
   sdk: '>=3.0.0 <4.0.0'
 
 dependencies:
+  equatable: ^2.0.5
   flex_color_scheme: ^7.1.2
   flutter:
     sdk: flutter
@@ -14,6 +15,7 @@ dependencies:
     sdk: flutter
   flutter_riverpod: ^2.3.6
   intl: any
+  meta: ^1.9.1
   shared_preferences: ^2.2.0
 
 dev_dependencies:
@@ -27,8 +29,8 @@ flutter:
   fonts:
     - family: GillSans
       fonts:
-        - asset: lib/presentation/fonts/GillSans.ttc
+        - asset: assets/fonts/GillSans.ttc
     - family: Segment7Standard
       fonts:
-        - asset: lib/presentation/fonts/Segment7Standard.otf
+        - asset: assets/fonts/Segment7Standard.otf
 
