@@ -1,6 +1,4 @@
-export 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:vehicle_consumption_calculator/fuel_calculator/components/app_bar.dart';
-import 'package:vehicle_consumption_calculator/fuel_calculator/screens/widgets/export.dart';
+import 'package:vehicle_consumption_calculator/fuel_calculator/export.dart';
 
 class ConsumptionTopAppBar extends StatelessWidget
     implements PreferredSizeWidget {

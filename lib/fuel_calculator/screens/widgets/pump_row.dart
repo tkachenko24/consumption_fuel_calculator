@@ -1,5 +1,4 @@
-import 'package:vehicle_consumption_calculator/fuel_calculator/components/export.dart';
-import 'package:vehicle_consumption_calculator/fuel_calculator/screens/widgets/export.dart';
+import 'package:vehicle_consumption_calculator/fuel_calculator/export.dart';
 
 class PumpRow extends StatelessWidget {
   const PumpRow({

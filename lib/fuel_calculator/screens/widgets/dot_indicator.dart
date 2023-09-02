@@ -1,4 +1,4 @@
-import 'package:vehicle_consumption_calculator/fuel_calculator/screens/widgets/export.dart';
+import 'package:vehicle_consumption_calculator/fuel_calculator/export.dart';
 
 class DotIndicator extends StatelessWidget {
   const DotIndicator({

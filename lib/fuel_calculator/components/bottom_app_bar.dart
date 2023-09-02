@@ -1,9 +1,4 @@
-import 'package:vehicle_consumption_calculator/fuel_calculator/components/app_bar.dart';
-import 'package:vehicle_consumption_calculator/fuel_calculator/components/sheet.dart';
-import 'package:vehicle_consumption_calculator/fuel_calculator/helpers/export.dart';
-import 'package:vehicle_consumption_calculator/fuel_calculator/providers/export.dart';
-import 'package:vehicle_consumption_calculator/fuel_calculator/screens/widgets/export.dart';
-import 'package:vehicle_consumption_calculator/fuel_calculator/services/data_base/interface.dart';
+import 'package:vehicle_consumption_calculator/fuel_calculator/export.dart';
 
 class ConsumptionBottomAppBar extends StatelessWidget {
   const ConsumptionBottomAppBar(

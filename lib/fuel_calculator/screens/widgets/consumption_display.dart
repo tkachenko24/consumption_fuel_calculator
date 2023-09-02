@@ -1,10 +1,4 @@
-import 'package:flex_color_scheme/flex_color_scheme.dart';
-import 'package:vehicle_consumption_calculator/fuel_calculator/components/export.dart';
-import 'package:vehicle_consumption_calculator/fuel_calculator/providers/export.dart';
-import 'package:vehicle_consumption_calculator/fuel_calculator/screens/widgets/export.dart';
-import 'package:vehicle_consumption_calculator/fuel_calculator/services/data_base/interface.dart';
-import 'package:vehicle_consumption_calculator/fuel_calculator/services/math/interface.dart';
-import 'package:vehicle_consumption_calculator/fuel_calculator/services/math/service.dart';
+import 'package:vehicle_consumption_calculator/fuel_calculator/export.dart';
 
 class ConsumptionDisplay extends StatelessWidget {
   const ConsumptionDisplay({
@@ -93,7 +87,7 @@ class ConsumptionDisplay extends StatelessWidget {
                               fuelData.fuelVolume != 0
                           ? () async {
                               db?.saveData(ref);
-                              print(consumption!.toStringAsFixed(2));
+                              print(consumption.toStringAsFixed(2));
                               print(db?.loadSavedData(ref));
                             }
                           : null,
