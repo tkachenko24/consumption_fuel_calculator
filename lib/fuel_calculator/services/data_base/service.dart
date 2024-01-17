@@ -1,63 +1,41 @@
-import 'package:intl/intl.dart';
 import 'package:vehicle_consumption_calculator/fuel_calculator/export.dart';
+import 'dart:convert';
 
 class DataBaseImpl implements DataBase {
-  final DataBaseModel db;
+  final AlwaysAliveRefreshable<Future<SharedPreferences>> prefs;
+  DataBaseImpl({required this.prefs});
 
-  DataBaseImpl(this.db);
+  static const String key = 'data_base';
+
   @override
-  Future<void> saveData(
+  void save(
     WidgetRef ref,
   ) async {
-    final ConsumptionCalculator calculator = ConsumptionCalculatorImpl();
-    final fuelData = ref.watch(fuelDataStateProvider),
-        now = DateTime.now(),
-        formatter = DateFormat('dd.MM.yy HH:mm'),
-        formattedDate = formatter.format(now);
-    double consumption = calculator.calculateConsumption(
-            fuelData.fuelVolume, fuelData.distance, fuelData.price, ref),
-        cost = calculator.calculateCost(fuelData.price, consumption, ref);
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    updateData(String key, dynamic value) async {
-      final List<String> data = prefs.getStringList(key) ?? [];
-      data.add(value.toString());
-      await prefs.setStringList(key, data);
-    }
-
-    await updateData('dates', formattedDate);
-    await updateData('volumes', fuelData.fuelVolume);
-    await updateData('prices', fuelData.price);
-    await updateData('distances', fuelData.distance);
-    await updateData('consumptions', consumption.toStringAsFixed(2));
-    await updateData('costs', cost.toStringAsFixed(2));
+    final prefs = await ref.watch(storageProvider.future);
+    List<String> storageList = prefs.getStringList(key) ?? [];
+    String dataToSave = jsonEncode(ref.watch(fuelDataStateProvider).toMap());
+    storageList.add(dataToSave);
+    prefs.setStringList(key, storageList);
   }
 
   @override
-  Future<void> loadSavedData(WidgetRef ref) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    db.dates = prefs.getStringList('dates') ?? [];
-    db.volumes = prefs.getStringList('volumes') ?? [];
-    db.prices = prefs.getStringList('prices') ?? [];
-    db.distances = prefs.getStringList('distances') ?? [];
-    db.consumptions = prefs.getStringList('consumptions') ?? [];
-    db.costs = prefs.getStringList('costs') ?? [];
+  List<Map<String, String>> load(
+    WidgetRef ref,
+  ) {
+    // List<String>? rawList = prefs?.getStringList(key);
+    // List<Map<String, String>> cleanList = jsonDecode(rawList.toString());
+    return [];
   }
 
   @override
-  Future<void> deleteSavedData(int index, WidgetRef ref) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    db.dates.removeAt(index);
-    db.volumes.removeAt(index);
-    db.prices.removeAt(index);
-    db.distances.removeAt(index);
-    db.consumptions.removeAt(index);
-    db.costs.removeAt(index);
-
-    await prefs.setStringList('dates', db.dates);
-    await prefs.setStringList('volumes', db.volumes);
-    await prefs.setStringList('prices', db.prices);
-    await prefs.setStringList('distances', db.distances);
-    await prefs.setStringList('consumptions', db.consumptions);
-    await prefs.setStringList('costs', db.costs);
+  Future<void> delete(
+    int index,
+    WidgetRef ref,
+  ) async {
+    // String rawData = await prefs.then((value) => value.getString(key) ?? '');
+    // List<FuelData> dataList = jsonDecode(rawData);
+    // dataList.removeAt(index);
+    // String value = jsonEncode(dataList);
+    // prefs.then((db) => db.setString(key, value));
   }
 }

@@ -38,8 +38,9 @@ class PumpDisplay extends StatelessWidget {
                 translates: translates,
                 status: fuelDataWatch.fuelVolume != 0.0,
                 onChanged: (value) {
-                  ref.read(fuelDataStateProvider.notifier).state = fuelDataWatch
-                      .copyWith(fuelVolume: double.tryParse(value) ?? 0.0);
+                  ref.watch(fuelDataStateProvider.notifier).state =
+                      fuelDataWatch.copyWith(
+                          fuelVolume: double.tryParse(value) ?? 0.0);
                 },
                 color: color,
                 height: height,
@@ -52,8 +53,9 @@ class PumpDisplay extends StatelessWidget {
                 translates: translates,
                 status: ref.watch(fuelDataStateProvider).price != 0.0,
                 onChanged: (value) {
-                  ref.read(fuelDataStateProvider.notifier).state = fuelDataWatch
-                      .copyWith(price: double.tryParse(value) ?? 0);
+                  ref.watch(fuelDataStateProvider.notifier).state =
+                      fuelDataWatch.copyWith(
+                          price: double.tryParse(value) ?? 0);
                 },
                 color: color,
                 height: height,
@@ -66,8 +68,9 @@ class PumpDisplay extends StatelessWidget {
                 translates: translates,
                 status: ref.watch(fuelDataStateProvider).distance != 0.0,
                 onChanged: (value) {
-                  ref.read(fuelDataStateProvider.notifier).state = fuelDataWatch
-                      .copyWith(distance: double.tryParse(value) ?? 0);
+                  ref.watch(fuelDataStateProvider.notifier).state =
+                      fuelDataWatch.copyWith(
+                          distance: double.tryParse(value) ?? 0);
                 },
                 color: color,
                 height: height,

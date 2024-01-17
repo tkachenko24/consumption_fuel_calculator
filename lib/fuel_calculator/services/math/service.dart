@@ -1,9 +1,9 @@
 import 'package:vehicle_consumption_calculator/fuel_calculator/providers/export.dart';
 import 'export.dart';
 
-class ConsumptionCalculatorImpl implements ConsumptionCalculator {
+class CalculatorImplementation implements Calculator {
   @override
-  double calculateConsumption(
+  double consumption(
       double fuelVolume, double distance, double price, WidgetRef ref) {
     if (distance == 0 || fuelVolume == 0 || price == 0) {
       return 0;
@@ -16,8 +16,7 @@ class ConsumptionCalculatorImpl implements ConsumptionCalculator {
   }
 
   @override
-  double calculateCost(
-      double price, double calculateConsumption, WidgetRef ref) {
+  double cost(double price, double calculateConsumption, WidgetRef ref) {
     if (calculateConsumption == 0 || price == 0) {
       return 0;
     } else {

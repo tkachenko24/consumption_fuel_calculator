@@ -1,5 +1,5 @@
 import 'package:flutter/services.dart';
-import 'package:vehicle_consumption_calculator/fuel_calculator/screens/widgets/export.dart';
+import 'package:vehicle_consumption_calculator/fuel_calculator/presentation/widgets/export.dart';
 
 class PumpInput extends StatelessWidget {
   const PumpInput({

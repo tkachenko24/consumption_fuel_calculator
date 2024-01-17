@@ -9,7 +9,7 @@ class ModeAppImpl extends StateNotifier<FlexScheme> implements ModeApp {
   static const String _modeKey = 'selected_mode';
 
   @override
-  Future<void> switchMode() async {
+  Future<void> change() async {
     if (state == FlexScheme.orangeM3) {
       state = FlexScheme.cyanM3;
     } else {

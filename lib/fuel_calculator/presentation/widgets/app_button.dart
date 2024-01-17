@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AppButton extends StatelessWidget {
@@ -12,12 +13,14 @@ class AppButton extends StatelessWidget {
     required this.size,
     required this.height,
     required this.color,
+    required this.isLoading,
   });
   final String tooltipText;
   final Widget icon;
   final Color iconColor, backgroundColor, borderColor;
   final ColorScheme color;
   final double size, height;
+  final bool isLoading;
   final void Function()? onTap;
 
   @override
@@ -37,7 +40,7 @@ class AppButton extends StatelessWidget {
         splashRadius: height * 0.1,
         color: iconColor,
         tooltip: tooltipText,
-        icon: icon,
+        icon: isLoading ? const CupertinoActivityIndicator() : icon,
         onPressed: onTap,
       ),
     );

@@ -1,8 +1,7 @@
 import 'package:vehicle_consumption_calculator/fuel_calculator/export.dart';
 
-class ConsumptionTopAppBar extends StatelessWidget
-    implements PreferredSizeWidget {
-  const ConsumptionTopAppBar({
+class TopBar extends StatelessWidget implements PreferredSizeWidget {
+  const TopBar({
     super.key,
     required this.color,
     required this.height,
@@ -44,6 +43,7 @@ class ConsumptionTopAppBar extends StatelessWidget
                   size: 0.03,
                   color: color,
                   height: height,
+                  isLoading: false,
                 )
               : AppButton(
                   icon: const Icon(Icons.arrow_back_sharp),
@@ -56,7 +56,9 @@ class ConsumptionTopAppBar extends StatelessWidget
                   borderColor: color.outline,
                   size: 0.03,
                   height: height,
-                  color: color)
+                  color: color,
+                  isLoading: false,
+                )
         ],
       ),
     );

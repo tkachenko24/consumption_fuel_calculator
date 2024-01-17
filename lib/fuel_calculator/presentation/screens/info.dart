@@ -14,7 +14,7 @@ class InfoScreen extends StatelessWidget {
         resizeToAvoidBottomInset: false,
         extendBody: true,
         backgroundColor: color.onPrimary,
-        appBar: ConsumptionTopAppBar(
+        appBar: TopBar(
           color: color,
           translates: translates,
           height: height,

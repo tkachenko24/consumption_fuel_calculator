@@ -33,11 +33,19 @@ class Pump extends StatelessWidget {
               translates: translates,
               width: width,
             ),
-            ConsumptionDisplay(
-              height: height,
-              color: color,
-              width: width,
-              translates: translates,
+            Consumer(
+              builder: (context, ref, child) => FutureBuilder(
+                  future: ref.watch(storageProvider.future),
+                  builder: (context, snapshot) {
+                    return ConsumptionDisplay(
+                      height: height,
+                      color: color,
+                      width: width,
+                      translates: translates,
+                      calculate: ref.watch(calculatorProvider),
+                      db: ref.watch(dataBaseProvider),
+                    );
+                  }),
             )
           ],
         ),

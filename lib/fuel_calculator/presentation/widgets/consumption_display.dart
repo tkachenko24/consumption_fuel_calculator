@@ -7,17 +7,18 @@ class ConsumptionDisplay extends StatelessWidget {
     required this.color,
     required this.width,
     required this.translates,
-    this.db,
+    required this.calculate,
+    required this.db,
   });
 
   final double height, width;
   final ColorScheme color;
   final AppLocalizations translates;
   final DataBase? db;
+  final Calculator calculate;
 
   @override
   Widget build(BuildContext context) {
-    ConsumptionCalculator calculator = ConsumptionCalculatorImpl();
     return Container(
       margin: EdgeInsets.only(top: height * 0.09),
       padding: EdgeInsets.all(height * 0.02),
@@ -29,7 +30,7 @@ class ConsumptionDisplay extends StatelessWidget {
           final fuelData = ref.watch(fuelDataStateProvider),
               unit = ref.watch(unitStateProvider),
               mode = ref.watch(modeStateProvider) == FlexScheme.orangeM3;
-          double? consumption = calculator.calculateConsumption(
+          double? consumption = calculate.consumption(
               fuelData.fuelVolume, fuelData.distance, fuelData.price, ref);
           return Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -85,10 +86,9 @@ class ConsumptionDisplay extends StatelessWidget {
                       onTap: fuelData.distance != 0 &&
                               fuelData.price != 0 &&
                               fuelData.fuelVolume != 0
-                          ? () async {
-                              db?.saveData(ref);
+                          ? () {
+                              db?.save(ref);
                               print(consumption.toStringAsFixed(2));
-                              print(db?.loadSavedData(ref));
                             }
                           : null,
                       tooltipText: translates.save_tooltip,
@@ -98,6 +98,7 @@ class ConsumptionDisplay extends StatelessWidget {
                       size: 0.04,
                       color: color,
                       height: height,
+                      isLoading: false,
                     )
                   ],
                 ),

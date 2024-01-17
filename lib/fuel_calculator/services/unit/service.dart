@@ -7,7 +7,7 @@ class UnitAppImpl extends StateNotifier<bool> implements UnitApp {
   static const String _unitKey = 'selected_unit';
 
   @override
-  Future<void> switchUnit() async {
+  Future<void> change() async {
     state = !state;
 
     final prefs = await SharedPreferences.getInstance();

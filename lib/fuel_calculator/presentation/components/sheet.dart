@@ -13,7 +13,7 @@ class ConsumptionSheet extends ConsumerStatefulWidget {
   final AppLocalizations translates;
   final double height;
   final ColorScheme color;
-  final ConsumptionCalculator? calculator;
+  final Calculator? calculator;
   final DataBase? db;
 
   @override
@@ -22,7 +22,7 @@ class ConsumptionSheet extends ConsumerStatefulWidget {
 
 void showConsumptionSheet(
     context, WidgetRef ref, color, height, translates, DataBase? db) {
-  db?.loadSavedData(ref);
+  db?.load(ref);
   showModalBottomSheet(
     useSafeArea: true,
     elevation: 10,
@@ -46,7 +46,7 @@ class ConsumptionSheetState extends ConsumerState<ConsumptionSheet> {
     WidgetRef ref,
     DataBase? db,
   ) {
-    db?.deleteSavedData(index, ref);
+    db?.delete(index, ref);
     setState(() {});
   }
 
@@ -69,6 +69,7 @@ class ConsumptionSheetState extends ConsumerState<ConsumptionSheet> {
         iconColor: widget.color.onSecondaryContainer,
         size: 0.04,
         tooltipText: '',
+        isLoading: false,
       ),
       body: SingleChildScrollView(
         child: Consumer(
@@ -178,15 +179,17 @@ class ConsumptionSheetState extends ConsumerState<ConsumptionSheet> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: AppButton(
-                            icon: const Icon(Icons.delete_sharp),
-                            onTap: () => deleteItem(index, ref, widget.db),
-                            tooltipText: widget.translates.delete,
-                            iconColor: widget.color.background,
-                            backgroundColor: widget.color.error,
-                            borderColor: widget.color.error,
-                            size: 0.03,
-                            height: widget.height,
-                            color: widget.color),
+                          icon: const Icon(Icons.delete_sharp),
+                          onTap: () => deleteItem(index, ref, widget.db),
+                          tooltipText: widget.translates.delete,
+                          iconColor: widget.color.background,
+                          backgroundColor: widget.color.error,
+                          borderColor: widget.color.error,
+                          size: 0.03,
+                          height: widget.height,
+                          color: widget.color,
+                          isLoading: false,
+                        ),
                       )
                     ],
                   );

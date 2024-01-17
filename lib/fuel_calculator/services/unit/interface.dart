@@ -1,4 +1,4 @@
 abstract class UnitApp {
-  Future<void> switchUnit();
+  Future<void> change();
   Future<void> loadSelectedUnit();
 }

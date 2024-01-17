@@ -1,6 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vehicle_consumption_calculator/fuel_calculator/providers/export.dart';
-import 'package:vehicle_consumption_calculator/fuel_calculator/screens/widgets/export.dart';
+import 'package:vehicle_consumption_calculator/fuel_calculator/presentation/widgets/export.dart';
 import 'package:vehicle_consumption_calculator/fuel_calculator/services/theme/export.dart';
 
 class ThemeAppImpl extends StateNotifier<ThemeMode> implements ThemeApp {
@@ -9,7 +9,7 @@ class ThemeAppImpl extends StateNotifier<ThemeMode> implements ThemeApp {
   static const String _themeKey = 'selected_theme';
 
   @override
-  Future<void> switchTheme() async {
+  Future<void> change() async {
     state = getNextThemeMode(state);
 
     final prefs = await SharedPreferences.getInstance();
